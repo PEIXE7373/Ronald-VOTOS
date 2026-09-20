@@ -90,6 +90,10 @@ button {
     cursor: pointer;
 }
 
+button:disabled {
+    cursor: not-allowed;
+}
+
 a {
     color: inherit;
     text-decoration: none;
@@ -142,7 +146,9 @@ img {
 }
 
 
-/* LOGO */
+/* =========================================================
+   LOGO
+   ========================================================= */
 
 .logo {
     font-size: 1.5rem;
@@ -157,7 +163,9 @@ img {
 }
 
 
-/* MENU MOBILE */
+/* =========================================================
+   MENU MOBILE
+   ========================================================= */
 
 .menu-btn {
     display: none;
@@ -180,8 +188,14 @@ img {
     font-size: 1.3rem;
 }
 
+.menu-btn:hover {
+    background: var(--card-hover);
+}
 
-/* MENU DESKTOP */
+
+/* =========================================================
+   MENU DESKTOP
+   ========================================================= */
 
 .main-nav {
     display: flex;
@@ -221,11 +235,6 @@ img {
     align-items: center;
 
     overflow: hidden;
-
-    /*
-       IMPORTANTE:
-       fundo.jpg deve estar dentro da pasta img
-    */
 
     background-image:
         linear-gradient(
@@ -377,7 +386,8 @@ img {
     transition:
         transform 0.2s ease,
         background 0.2s ease,
-        border 0.2s ease;
+        border 0.2s ease,
+        opacity 0.2s ease;
 }
 
 .btn:hover {
@@ -424,6 +434,27 @@ img {
 
     color:
         #ff91a0;
+}
+
+
+/* =========================================================
+   BOTÕES DESABILITADOS
+   ========================================================= */
+
+.btn:disabled {
+    opacity: 0.45;
+
+    transform: none;
+
+    pointer-events: none;
+}
+
+.btn-primary:disabled {
+    background:
+        var(--green);
+
+    color:
+        #00150d;
 }
 
 
@@ -805,6 +836,28 @@ img {
 
 
 /* =========================================================
+   BOTÕES DE CANDIDATO DESABILITADOS
+   ========================================================= */
+
+.select-candidate:disabled {
+    opacity: 0.4;
+
+    color:
+        var(--gray-dark);
+
+    background:
+        rgba(255, 255, 255, 0.02);
+
+    border-color:
+        var(--border);
+
+    transform: none;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
    VOTAÇÃO
    ========================================================= */
 
@@ -896,6 +949,32 @@ img {
         var(--green);
 }
 
+
+/* =========================================================
+   QUICK BUTTON DESABILITADO
+   ========================================================= */
+
+.quick-btn:disabled {
+    opacity:
+        0.4;
+
+    background:
+        rgba(255, 255, 255, 0.02);
+
+    color:
+        var(--gray-dark);
+
+    border-color:
+        var(--border);
+
+    transform:
+        none;
+
+    pointer-events:
+        none;
+}
+
+
 .vote-box {
     padding:
         34px;
@@ -970,6 +1049,34 @@ img {
         0 0 0 3px
         rgba(0, 208, 132, 0.1);
 }
+
+
+/* =========================================================
+   INPUT BLOQUEADO
+   ========================================================= */
+
+.vote-input input:disabled {
+    opacity:
+        0.5;
+
+    background:
+        #060a10;
+
+    color:
+        var(--gray-dark);
+
+    cursor:
+        not-allowed;
+
+    border-color:
+        rgba(255, 255, 255, 0.05);
+}
+
+.vote-input input:disabled::placeholder {
+    color:
+        var(--gray-dark);
+}
+
 
 .vote-message {
     min-height:
@@ -1262,6 +1369,11 @@ img {
 
     font-size:
         1.5rem;
+}
+
+.modal-close:hover {
+    background:
+        rgba(255, 255, 255, 0.12);
 }
 
 .modal-icon {

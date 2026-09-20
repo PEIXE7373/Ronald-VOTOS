@@ -1,51 +1,84 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>RonaldVotos | Simulador Educacional</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+    <meta
+        name="description"
+        content="RonaldVotos - Simulação de votação"
+    >
+
+    <title>RonaldVotos</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
 </head>
 
 <body>
 
-    <!-- ================= HEADER ================= -->
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
 
     <header class="header">
 
         <div class="container header-content">
 
-            <a href="#inicio" class="logo">
-                <span>Ronald</span>Votos
+            <a
+                href="#inicio"
+                class="logo"
+            >
+                Ronald<span>VOTOS</span>
             </a>
 
             <button
-                id="menuBtn"
                 class="menu-btn"
+                id="menuBtn"
                 type="button"
                 aria-label="Abrir menu"
+                aria-expanded="false"
             >
                 ☰
             </button>
 
-            <nav id="mainNav" class="main-nav">
+            <nav
+                class="main-nav"
+                id="mainNav"
+            >
 
-                <a href="#inicio" class="nav-link active">
+                <a
+                    href="#inicio"
+                    class="nav-link active"
+                >
                     Início
                 </a>
 
-                <a href="#candidatos" class="nav-link">
+                <a
+                    href="#candidatos"
+                    class="nav-link"
+                >
                     Candidatos
                 </a>
 
-                <a href="#votacao" class="nav-link">
-                    Votação
+                <a
+                    href="#votacao"
+                    class="nav-link"
+                >
+                    Votar
                 </a>
 
-                <a href="#resultados" class="nav-link">
+                <a
+                    href="#resultados"
+                    class="nav-link"
+                >
                     Resultados
                 </a>
 
@@ -56,34 +89,33 @@
     </header>
 
 
-    <!-- ================= CONTEÚDO ================= -->
-
     <main>
 
+        <!-- =====================================================
+             HERO
+        ====================================================== -->
 
-        <!-- ================= HERO ================= -->
-
-        <section id="inicio" class="hero">
-
-            <div class="hero-overlay"></div>
+        <section
+            class="hero"
+            id="inicio"
+        >
 
             <div class="container hero-content">
 
                 <div class="hero-text">
 
                     <span class="hero-badge">
-                        SIMULADOR EDUCACIONAL
+                        SIMULAÇÃO DE VOTAÇÃO
                     </span>
 
                     <h1>
-                        Conheça.
-                        <span>Compare.</span>
-                        Escolha.
+                        Seu voto.
+                        <span>Sua escolha.</span>
                     </h1>
 
                     <p>
-                        Uma experiência educativa para conhecer candidatos,
-                        simular votos e acompanhar os resultados.
+                        Escolha um candidato, registre seu voto
+                        e acompanhe os resultados da votação.
                     </p>
 
                     <div class="hero-buttons">
@@ -96,10 +128,10 @@
                         </a>
 
                         <a
-                            href="#votacao"
+                            href="#resultados"
                             class="btn btn-secondary"
                         >
-                            Votar agora
+                            Ver resultados
                         </a>
 
                     </div>
@@ -118,19 +150,34 @@
                     </h2>
 
                     <p>
-                        Simulador simples e educativo.
+                        Acompanhe a votação em tempo real
                     </p>
 
                     <div class="hero-stats">
 
                         <div>
-                            <strong id="heroVotes">0</strong>
-                            <span>votos</span>
+
+                            <strong id="heroVotes">
+                                0
+                            </strong>
+
+                            <span>
+                                Votos registrados
+                            </span>
+
                         </div>
 
+
                         <div>
-                            <strong>5</strong>
-                            <span>candidatos</span>
+
+                            <strong>
+                                5
+                            </strong>
+
+                            <span>
+                                Candidatos
+                            </span>
+
                         </div>
 
                     </div>
@@ -142,11 +189,13 @@
         </section>
 
 
-        <!-- ================= CANDIDATOS ================= -->
+        <!-- =====================================================
+             CANDIDATOS
+        ====================================================== -->
 
         <section
-            id="candidatos"
             class="section candidates-section"
+            id="candidatos"
         >
 
             <div class="container">
@@ -158,22 +207,24 @@
                     </span>
 
                     <h2>
-                        Conheça os candidatos
+                        Escolha seu candidato
                     </h2>
 
                     <p>
-                        Selecione um candidato para preencher
-                        automaticamente a votação.
+                        Pesquise ou selecione um candidato
+                        para iniciar sua votação.
                     </p>
 
                 </div>
 
 
-                <!-- BUSCA -->
+                <!-- PESQUISA -->
 
                 <div class="search-box">
 
-                    <span>🔎</span>
+                    <span>
+                        🔎
+                    </span>
 
                     <input
                         type="search"
@@ -188,10 +239,9 @@
                 <!-- CARDS -->
 
                 <div
-                    id="candidateGrid"
                     class="candidate-grid"
+                    id="candidateGrid"
                 >
-
 
                     <!-- LULA -->
 
@@ -411,8 +461,8 @@
 
 
                 <p
-                    id="noResults"
                     class="no-results"
+                    id="noResults"
                     hidden
                 >
                     Nenhum candidato encontrado.
@@ -423,11 +473,13 @@
         </section>
 
 
-        <!-- ================= VOTAÇÃO ================= -->
+        <!-- =====================================================
+             VOTAÇÃO
+        ====================================================== -->
 
         <section
-            id="votacao"
             class="section voting-section"
+            id="votacao"
         >
 
             <div class="container voting-container">
@@ -443,8 +495,8 @@
                     </h2>
 
                     <p>
-                        Digite o nome do candidato ou selecione
-                        uma das opções.
+                        Digite o nome do candidato ou
+                        selecione uma das opções rápidas.
                     </p>
 
 
@@ -500,7 +552,7 @@
                     <form id="voteForm">
 
                         <label for="candidateInput">
-                            Seu candidato
+                            Candidato
                         </label>
 
                         <div class="vote-input">
@@ -508,14 +560,14 @@
                             <input
                                 type="text"
                                 id="candidateInput"
-                                placeholder="Ex.: Lula"
+                                name="candidate"
+                                placeholder="Digite o nome do candidato"
                                 autocomplete="off"
                                 required
                             >
 
                             <button
                                 type="submit"
-                                id="voteButton"
                                 class="btn btn-primary"
                             >
                                 Votar
@@ -524,9 +576,8 @@
                         </div>
 
                         <p
-                            id="voteMessage"
                             class="vote-message"
-                            role="status"
+                            id="voteMessage"
                             aria-live="polite"
                         ></p>
 
@@ -539,11 +590,13 @@
         </section>
 
 
-        <!-- ================= RESULTADOS ================= -->
+        <!-- =====================================================
+             RESULTADOS
+        ====================================================== -->
 
         <section
-            id="resultados"
             class="section results-section"
+            id="resultados"
         >
 
             <div class="container">
@@ -555,12 +608,12 @@
                     </span>
 
                     <h2>
-                        Resultado da simulação
+                        Resultado da votação
                     </h2>
 
                     <p>
-                        Veja a quantidade de votos registrada
-                        para cada candidato.
+                        Acompanhe a quantidade e a porcentagem
+                        de votos de cada candidato.
                     </p>
 
                 </div>
@@ -580,10 +633,11 @@
 
                     </div>
 
+
                     <button
                         type="button"
-                        id="resetButton"
                         class="btn btn-danger"
+                        id="resetButton"
                     >
                         Zerar votos
                     </button>
@@ -592,8 +646,8 @@
 
 
                 <div
-                    id="results"
                     class="results-list"
+                    id="results"
                 ></div>
 
             </div>
@@ -603,32 +657,44 @@
     </main>
 
 
-    <!-- ================= MODAL ================= -->
+    <!-- =====================================================
+         MODAL
+    ====================================================== -->
 
     <div
-        id="modal"
         class="modal"
+        id="modal"
         hidden
     >
 
-        <div class="modal-background"></div>
+        <div
+            class="modal-background"
+        ></div>
 
-        <div class="modal-content">
+
+        <div
+            class="modal-content"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modalTitle"
+        >
 
             <button
                 type="button"
-                id="modalClose"
                 class="modal-close"
+                id="modalClose"
                 aria-label="Fechar"
             >
                 ×
             </button>
 
+
             <div class="modal-icon">
                 ✓
             </div>
 
-            <h2>
+
+            <h2 id="modalTitle">
                 Voto registrado!
             </h2>
 
@@ -637,15 +703,16 @@
             </p>
 
             <strong id="modalCandidate">
-                -
+                Candidato
             </strong>
+
 
             <button
                 type="button"
-                id="modalOk"
                 class="btn btn-primary modal-button"
+                id="modalOk"
             >
-                Continuar
+                Entendi
             </button>
 
         </div>
@@ -653,36 +720,37 @@
     </div>
 
 
-    <!-- ================= FOOTER ================= -->
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
 
     <footer class="footer">
 
         <div class="container footer-content">
 
-            <div>
-
-                <strong class="footer-logo">
-                    RonaldVotos
-                </strong>
-
-                <p>
-                    Simulador educacional de votação.
-                </p>
-
-            </div>
+            <strong class="footer-logo">
+                RonaldVotos
+            </strong>
 
             <p>
-                © 2026 RonaldVotos
+                Simulação de votação criada por Ronald.
             </p>
 
         </div>
 
+
         <div class="disclaimer">
-            Este site é apenas uma simulação educacional
-            e não possui validade eleitoral.
+
+            Este site é uma simulação e não representa
+            uma votação oficial ou resultado eleitoral.
+
         </div>
 
     </footer>
 
+
+    <script src="script.js"></script>
+
 </body>
+
 </html>

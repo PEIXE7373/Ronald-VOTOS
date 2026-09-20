@@ -49,6 +49,12 @@ const candidatos = [
 
 const STORAGE_KEY = "ronaldVotos";
 
+/*
+   Guarda se este navegador já votou.
+*/
+const VOTED_KEY = "ronaldVotos_ja_votou";
+
+
 const votosPadrao = {
     LULA: 0,
     DILMA: 0,
@@ -143,6 +149,7 @@ function carregarVotos() {
                 STORAGE_KEY
             );
 
+
         if (!dados) {
 
             return {
@@ -151,12 +158,15 @@ function carregarVotos() {
 
         }
 
+
         const armazenados =
             JSON.parse(dados);
+
 
         const resultado = {
             ...votosPadrao
         };
+
 
         candidatos.forEach(
             candidato => {
@@ -167,6 +177,7 @@ function carregarVotos() {
                             candidato.id
                         ]
                     );
+
 
                 if (
                     Number.isFinite(valor) &&
@@ -183,6 +194,7 @@ function carregarVotos() {
             }
         );
 
+
         return resultado;
 
     } catch (erro) {
@@ -191,6 +203,7 @@ function carregarVotos() {
             "Erro ao carregar votos:",
             erro
         );
+
 
         return {
             ...votosPadrao
@@ -223,6 +236,145 @@ function salvarVotos() {
 
 
 /* =========================================================
+   CONTROLE DE VOTO
+   ========================================================= */
+
+function jaVotou() {
+
+    try {
+
+        return (
+            localStorage.getItem(
+                VOTED_KEY
+            ) === "true"
+        );
+
+    } catch (erro) {
+
+        console.error(
+            "Erro ao verificar voto:",
+            erro
+        );
+
+        return false;
+
+    }
+
+}
+
+
+function marcarComoVotou() {
+
+    try {
+
+        localStorage.setItem(
+            VOTED_KEY,
+            "true"
+        );
+
+    } catch (erro) {
+
+        console.error(
+            "Erro ao registrar bloqueio:",
+            erro
+        );
+
+    }
+
+}
+
+
+function liberarVoto() {
+
+    try {
+
+        localStorage.removeItem(
+            VOTED_KEY
+        );
+
+    } catch (erro) {
+
+        console.error(
+            "Erro ao liberar voto:",
+            erro
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   ATUALIZAR ESTADO DA VOTAÇÃO
+   ========================================================= */
+
+function atualizarEstadoVotacao() {
+
+    const votado =
+        jaVotou();
+
+
+    const botoesCandidatos =
+        document.querySelectorAll(
+            ".select-candidate, .quick-btn"
+        );
+
+
+    if (votado) {
+
+        input.disabled =
+            true;
+
+
+        input.placeholder =
+            "Você já registrou seu voto";
+
+
+        input.value =
+            "";
+
+
+        botoesCandidatos.forEach(
+            botao => {
+
+                botao.disabled =
+                    true;
+
+            }
+        );
+
+
+        mostrarMensagem(
+            "Você já votou. Este navegador não pode registrar outro voto.",
+            "success"
+        );
+
+
+    } else {
+
+        input.disabled =
+            false;
+
+
+        input.placeholder =
+            "Digite o nome do candidato";
+
+
+        botoesCandidatos.forEach(
+            botao => {
+
+                botao.disabled =
+                    false;
+
+            }
+        );
+
+    }
+
+}
+
+
+/* =========================================================
    FUNÇÕES AUXILIARES
    ========================================================= */
 
@@ -245,8 +397,10 @@ function encontrarCandidato(valor) {
     const busca =
         normalizar(valor);
 
+
     return candidatos.find(
         candidato =>
+
             normalizar(
                 candidato.id
             ) === busca ||
@@ -267,7 +421,10 @@ function calcularTotal() {
 
     return Object.values(votos)
         .reduce(
-            (total, quantidade) =>
+            (
+                total,
+                quantidade
+            ) =>
                 total + quantidade,
             0
         );
@@ -287,8 +444,10 @@ function mostrarMensagem(
     voteMessage.textContent =
         texto;
 
+
     voteMessage.className =
         "vote-message";
+
 
     if (tipo === "success") {
 
@@ -297,6 +456,7 @@ function mostrarMensagem(
         );
 
     }
+
 
     if (tipo === "error") {
 
@@ -315,23 +475,45 @@ function mostrarMensagem(
 
 function selecionarCandidato(id) {
 
+    /*
+       Segurança adicional:
+       mesmo que alguém tente chamar
+       a função manualmente, o voto continua bloqueado.
+    */
+
+    if (jaVotou()) {
+
+        mostrarMensagem(
+            "Você já votou. Não é possível registrar outro voto.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
     const candidato =
         candidatos.find(
             item =>
                 item.id === id
         );
 
+
     if (!candidato) {
         return;
     }
 
+
     input.value =
         candidato.nome;
+
 
     mostrarMensagem(
         `${candidato.nome} selecionado. Clique em "Votar".`,
         "success"
     );
+
 
     document
         .getElementById("votacao")
@@ -340,8 +522,17 @@ function selecionarCandidato(id) {
             block: "center"
         });
 
+
     setTimeout(
-        () => input.focus(),
+        () => {
+
+            if (!input.disabled) {
+
+                input.focus();
+
+            }
+
+        },
         300
     );
 
@@ -354,10 +545,29 @@ function selecionarCandidato(id) {
 
 function votar() {
 
+    /*
+       PRIMEIRO BLOQUEIO
+
+       Verifica se o navegador já votou.
+    */
+
+    if (jaVotou()) {
+
+        mostrarMensagem(
+            "Você já votou. Este navegador já registrou um voto.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
     const candidato =
         encontrarCandidato(
             input.value
         );
+
 
     if (!candidato) {
 
@@ -366,34 +576,75 @@ function votar() {
             "error"
         );
 
+
         input.focus();
 
         return;
+
     }
 
+
+    /*
+       REGISTRA O VOTO
+    */
 
     votos[
         candidato.id
     ]++;
 
 
+    /*
+       SALVA OS VOTOS
+    */
+
     salvarVotos();
+
+
+    /*
+       MARCA O NAVEGADOR COMO JÁ VOTADO
+    */
+
+    marcarComoVotou();
+
+
+    /*
+       ATUALIZA OS RESULTADOS
+    */
 
     atualizarResultados();
 
 
+    /*
+       LIMPA O CAMPO
+    */
+
     input.value = "";
 
 
+    /*
+       MOSTRA MENSAGEM
+    */
+
     mostrarMensagem(
-        "Voto registrado com sucesso!",
+        "Voto registrado com sucesso! Você já votou.",
         "success"
     );
 
 
+    /*
+       ABRE MODAL
+    */
+
     abrirModal(
         candidato
     );
+
+
+    /*
+       BLOQUEIA A VOTAÇÃO
+    */
+
+    atualizarEstadoVotacao();
 
 }
 
@@ -420,7 +671,8 @@ function atualizarResultados() {
         );
 
 
-    results.innerHTML = "";
+    results.innerHTML =
+        "";
 
 
     candidatos.forEach(
@@ -446,6 +698,7 @@ function atualizarResultados() {
                     "div"
                 );
 
+
             item.className =
                 "result-item";
 
@@ -454,6 +707,7 @@ function atualizarResultados() {
                 document.createElement(
                     "div"
                 );
+
 
             header.className =
                 "result-header";
@@ -464,8 +718,10 @@ function atualizarResultados() {
                     "span"
                 );
 
+
             nome.className =
                 "result-name";
+
 
             nome.textContent =
                 `${candidato.nome} — ${candidato.partido}`;
@@ -476,8 +732,10 @@ function atualizarResultados() {
                     "span"
                 );
 
+
             quantidadeTexto.className =
                 "result-votes";
+
 
             quantidadeTexto.textContent =
                 `${quantidade} ${
@@ -491,6 +749,7 @@ function atualizarResultados() {
                 nome
             );
 
+
             header.appendChild(
                 quantidadeTexto
             );
@@ -501,6 +760,7 @@ function atualizarResultados() {
                     "div"
                 );
 
+
             barra.className =
                 "result-bar";
 
@@ -510,8 +770,10 @@ function atualizarResultados() {
                     "div"
                 );
 
+
             progresso.className =
                 "result-progress";
+
 
             progresso.style.width =
                 `${porcentagem}%`;
@@ -527,8 +789,10 @@ function atualizarResultados() {
                     "small"
                 );
 
+
             percentual.className =
                 "result-percent";
+
 
             percentual.textContent =
                 `${porcentagem.toFixed(1)}%`;
@@ -538,9 +802,11 @@ function atualizarResultados() {
                 header
             );
 
+
             item.appendChild(
                 barra
             );
+
 
             item.appendChild(
                 percentual
@@ -568,7 +834,10 @@ function abrirModal(
     modalCandidate.textContent =
         candidato.nome;
 
-    modal.hidden = false;
+
+    modal.hidden =
+        false;
+
 
     document.body.classList.add(
         "modal-open"
@@ -579,7 +848,9 @@ function abrirModal(
 
 function fecharModal() {
 
-    modal.hidden = true;
+    modal.hidden =
+        true;
+
 
     document.body.classList.remove(
         "modal-open"
@@ -713,7 +984,9 @@ search.addEventListener(
                 search.value
             );
 
-        let encontrados = 0;
+
+        let encontrados =
+            0;
 
 
         document
@@ -744,6 +1017,7 @@ search.addEventListener(
                         normalizar(
                             candidato.nome
                         );
+
 
                     const partido =
                         normalizar(
@@ -802,6 +1076,10 @@ resetButton.addEventListener(
         }
 
 
+        /*
+           ZERA TODOS OS VOTOS
+        */
+
         votos = {
             ...votosPadrao
         };
@@ -809,10 +1087,30 @@ resetButton.addEventListener(
 
         salvarVotos();
 
+
+        /*
+           LIBERA NOVAMENTE O NAVEGADOR
+        */
+
+        liberarVoto();
+
+
+        /*
+           ATUALIZA RESULTADOS
+        */
+
         atualizarResultados();
 
+
+        /*
+           ATUALIZA BOTÕES
+        */
+
+        atualizarEstadoVotacao();
+
+
         mostrarMensagem(
-            "Todos os votos foram zerados.",
+            "Todos os votos foram zerados. O voto foi liberado novamente.",
             "success"
         );
 
@@ -858,6 +1156,7 @@ document
                         "open"
                     );
 
+
                     menuBtn.setAttribute(
                         "aria-expanded",
                         "false"
@@ -885,6 +1184,7 @@ window.addEventListener(
             mainNav.classList.remove(
                 "open"
             );
+
 
             menuBtn.setAttribute(
                 "aria-expanded",
@@ -915,13 +1215,21 @@ document
                     imagem.style.display =
                         "none";
 
+
                     imagem.parentElement
                         .style.display =
                         "grid";
 
+
                     imagem.parentElement
                         .style.placeItems =
                         "center";
+
+
+                    imagem.parentElement
+                        .style.color =
+                        "#a6b0c0";
+
 
                     imagem.parentElement
                         .textContent =
@@ -942,3 +1250,5 @@ document
    ========================================================= */
 
 atualizarResultados();
+
+atualizarEstadoVotacao();
