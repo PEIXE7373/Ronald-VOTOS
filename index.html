@@ -1,913 +1,662 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <meta
         name="description"
-        content="Projeto educacional de simulação eleitoral."
+        content="RonaldVotos — simulador educacional de votação."
     >
 
     <title>RonaldVotos | Simulador Educacional</title>
 
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
-
-    <!-- Ícones -->
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    >
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 
 <body>
 
-<!-- ==================================================
-     HEADER
-================================================== -->
+    <!-- ================= HEADER ================= -->
+    <header class="header">
 
-<header class="header">
+        <div class="container header-content">
 
-    <div class="container nav">
-
-        <a href="#inicio" class="logo">
-
-            <div class="logo-icon">
-                <i class="fa-solid fa-check-to-slot"></i>
-            </div>
-
-            <div>
-                <strong>Ronald<span>Votos</span></strong>
-                <small>SIMULADOR EDUCACIONAL</small>
-            </div>
-
-        </a>
-
-
-        <nav class="menu">
-
-            <a href="#inicio" class="active">
-                Início
+            <a href="#inicio" class="logo">
+                <span>Ronald</span>Votos
             </a>
 
-            <a href="#candidatos">
-                Candidatos
-            </a>
-
-            <a href="#sobre">
-                Sobre
-            </a>
-
-            <a href="#resultado">
-                Resultado
-            </a>
-
-        </nav>
-
-
-        <button
-            class="menu-btn"
-            id="menuBtn"
-        >
-            <i class="fa-solid fa-bars"></i>
-        </button>
-
-    </div>
-
-</header>
-
-
-<!-- ==================================================
-     HERO
-================================================== -->
-
-<section
-    class="hero"
-    id="inicio"
->
-
-    <div class="hero-overlay"></div>
-
-    <div class="container hero-content">
-
-        <div class="badge">
-            <i class="fa-solid fa-shield-halved"></i>
-            PROJETO EDUCACIONAL
-        </div>
-
-        <h1>
-            Conheça.
-            <span>Compare.</span>
-            Escolha.
-        </h1>
-
-        <p>
-            Uma experiência digital criada para estudar
-            HTML, CSS e JavaScript através de uma
-            simulação eleitoral.
-        </p>
-
-
-        <div class="hero-buttons">
-
-            <a
-                href="#candidatos"
-                class="btn btn-primary"
+            <button
+                class="menu-btn"
+                id="menuBtn"
+                type="button"
+                aria-label="Abrir menu"
+                aria-expanded="false"
             >
-                <i class="fa-solid fa-users"></i>
-                Ver candidatos
-            </a>
+                ☰
+            </button>
 
-            <a
-                href="#sobre"
-                class="btn btn-outline"
-            >
-                Saiba mais
-                <i class="fa-solid fa-arrow-down"></i>
-            </a>
+            <nav class="main-nav" id="mainNav">
 
-        </div>
+                <a href="#inicio" class="nav-link active">
+                    Início
+                </a>
 
+                <a href="#candidatos" class="nav-link">
+                    Candidatos
+                </a>
 
-        <div class="hero-stats">
+                <a href="#votacao" class="nav-link">
+                    Votação
+                </a>
 
-            <div>
-                <strong>05</strong>
-                <span>Candidatos</span>
-            </div>
+                <a href="#resultados" class="nav-link">
+                    Resultados
+                </a>
 
-            <div>
-                <strong>100%</strong>
-                <span>Educacional</span>
-            </div>
-
-            <div>
-                <strong>03</strong>
-                <span>Tecnologias</span>
-            </div>
+            </nav>
 
         </div>
 
-    </div>
-
-</section>
+    </header>
 
 
-<!-- ==================================================
-     AVISO
-================================================== -->
+    <main>
 
-<section class="notice">
+        <!-- ================= HERO ================= -->
+        <section class="hero" id="inicio">
 
-    <div class="container notice-content">
+            <div class="container hero-content">
 
-        <i class="fa-solid fa-circle-info"></i>
+                <div class="hero-text">
 
-        <div>
-
-            <strong>
-                Atenção
-            </strong>
-
-            <p>
-                Este projeto é apenas uma simulação
-                educacional. Nenhum voto possui validade
-                eleitoral e nenhum dado é enviado para
-                órgãos oficiais.
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ==================================================
-     CANDIDATOS
-================================================== -->
-
-<section
-    class="section"
-    id="candidatos"
->
-
-    <div class="container">
-
-        <div class="section-header">
-
-            <div>
-
-                <span class="section-tag">
-                    <i class="fa-solid fa-users"></i>
-                    PARTICIPANTES
-                </span>
-
-                <h2>
-                    Conheça os candidatos
-                </h2>
-
-                <p>
-                    Pesquise e selecione um candidato
-                    para utilizar o simulador.
-                </p>
-
-            </div>
-
-
-            <div class="search-box">
-
-                <i class="fa-solid fa-search"></i>
-
-                <input
-                    type="text"
-                    id="search"
-                    placeholder="Pesquisar candidato..."
-                >
-
-            </div>
-
-        </div>
-
-
-        <div
-            class="candidate-grid"
-            id="candidateGrid"
-        >
-
-
-            <!-- LULA -->
-
-            <article
-                class="candidate-card"
-                data-name="lula"
-            >
-
-                <div class="candidate-image">
-
-                    <img
-                        src="img/lula.jpg"
-                        alt="Lula"
-                    >
-
-                    <span class="candidate-number">
-                        01
+                    <span class="hero-badge">
+                        SIMULADOR EDUCACIONAL
                     </span>
 
-                </div>
-
-
-                <div class="candidate-content">
-
-                    <span class="candidate-label">
-                        CANDIDATO
-                    </span>
-
-                    <h3>
-                        Lula
-                    </h3>
-
-                    <span class="party">
-                        PT
-                    </span>
+                    <h1>
+                        Conheça.
+                        <span>Compare.</span>
+                        Escolha.
+                    </h1>
 
                     <p>
-                        Informações históricas e
-                        eleitorais para fins educacionais.
+                        Uma experiência educativa para simular uma votação,
+                        conhecer os candidatos e acompanhar os resultados.
                     </p>
 
-                    <button
-                        class="select-btn"
-                        data-candidate="LULA"
-                    >
-                        Selecionar
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </button>
+                    <div class="hero-buttons">
 
-                </div>
+                        <a href="#candidatos" class="btn btn-primary">
+                            Ver candidatos
+                        </a>
 
-            </article>
+                        <a href="#votacao" class="btn btn-secondary">
+                            Votar agora
+                        </a>
 
-
-            <!-- DILMA -->
-
-            <article
-                class="candidate-card"
-                data-name="dilma"
-            >
-
-                <div class="candidate-image">
-
-                    <img
-                        src="img/dilma.jpg"
-                        alt="Dilma Rousseff"
-                    >
-
-                    <span class="candidate-number">
-                        02
-                    </span>
+                    </div>
 
                 </div>
 
 
-                <div class="candidate-content">
+                <div class="hero-card">
 
-                    <span class="candidate-label">
-                        CANDIDATA
-                    </span>
+                    <div class="hero-card-icon">
+                        🗳️
+                    </div>
 
-                    <h3>
-                        Dilma
-                    </h3>
-
-                    <span class="party">
-                        PT
-                    </span>
+                    <h2>
+                        RonaldVotos
+                    </h2>
 
                     <p>
-                        Informações históricas e
-                        eleitorais para fins educacionais.
+                        Simulação simples, rápida e educativa.
                     </p>
 
-                    <button
-                        class="select-btn"
-                        data-candidate="DILMA"
-                    >
-                        Selecionar
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </button>
+                    <div class="hero-stats">
+
+                        <div>
+                            <strong id="heroVotes">0</strong>
+                            <span>votos</span>
+                        </div>
+
+                        <div>
+                            <strong>5</strong>
+                            <span>candidatos</span>
+                        </div>
+
+                    </div>
 
                 </div>
-
-            </article>
-
-
-            <!-- SERRA -->
-
-            <article
-                class="candidate-card"
-                data-name="serra"
-            >
-
-                <div class="candidate-image">
-
-                    <img
-                        src="img/serra.jpg"
-                        alt="José Serra"
-                    >
-
-                    <span class="candidate-number">
-                        03
-                    </span>
-
-                </div>
-
-
-                <div class="candidate-content">
-
-                    <span class="candidate-label">
-                        CANDIDATO
-                    </span>
-
-                    <h3>
-                        Serra
-                    </h3>
-
-                    <span class="party">
-                        PSDB
-                    </span>
-
-                    <p>
-                        Informações históricas e
-                        eleitorais para fins educacionais.
-                    </p>
-
-                    <button
-                        class="select-btn"
-                        data-candidate="SERRA"
-                    >
-                        Selecionar
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </button>
-
-                </div>
-
-            </article>
-
-
-            <!-- MARINA -->
-
-            <article
-                class="candidate-card"
-                data-name="marina"
-            >
-
-                <div class="candidate-image">
-
-                    <img
-                        src="img/marina.jpg"
-                        alt="Marina Silva"
-                    >
-
-                    <span class="candidate-number">
-                        04
-                    </span>
-
-                </div>
-
-
-                <div class="candidate-content">
-
-                    <span class="candidate-label">
-                        CANDIDATA
-                    </span>
-
-                    <h3>
-                        Marina
-                    </h3>
-
-                    <span class="party">
-                        REDE
-                    </span>
-
-                    <p>
-                        Informações históricas e
-                        eleitorais para fins educacionais.
-                    </p>
-
-                    <button
-                        class="select-btn"
-                        data-candidate="MARINA"
-                    >
-                        Selecionar
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </button>
-
-                </div>
-
-            </article>
-
-
-            <!-- BOLSONARO -->
-
-            <article
-                class="candidate-card"
-                data-name="bolsonaro"
-            >
-
-                <div class="candidate-image">
-
-                    <img
-                        src="img/bolsonaro.jpg"
-                        alt="Jair Bolsonaro"
-                    >
-
-                    <span class="candidate-number">
-                        05
-                    </span>
-
-                </div>
-
-
-                <div class="candidate-content">
-
-                    <span class="candidate-label">
-                        CANDIDATO
-                    </span>
-
-                    <h3>
-                        Bolsonaro
-                    </h3>
-
-                    <span class="party">
-                        PL
-                    </span>
-
-                    <p>
-                        Informações históricas e
-                        eleitorais para fins educacionais.
-                    </p>
-
-                    <button
-                        class="select-btn"
-                        data-candidate="BOLSONARO"
-                    >
-                        Selecionar
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </button>
-
-                </div>
-
-            </article>
-
-
-        </div>
-
-
-        <div
-            class="no-results"
-            id="noResults"
-        >
-            <i class="fa-solid fa-face-frown"></i>
-
-            <h3>
-                Nenhum candidato encontrado
-            </h3>
-
-            <p>
-                Tente pesquisar por outro nome.
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ==================================================
-     ÁREA DE VOTAÇÃO
-================================================== -->
-
-<section class="vote-section">
-
-    <div class="container">
-
-        <div class="vote-box">
-
-            <div class="vote-icon">
-                <i class="fa-solid fa-check-to-slot"></i>
-            </div>
-
-            <div class="vote-info">
-
-                <span>
-                    SIMULADOR DE VOTO
-                </span>
-
-                <h2>
-                    Faça sua escolha
-                </h2>
-
-                <p>
-                    Digite ou selecione o nome de um
-                    candidato para continuar.
-                </p>
 
             </div>
 
+        </section>
 
-            <div class="vote-form">
 
-                <div class="input-wrapper">
+        <!-- ================= CANDIDATOS ================= -->
+        <section class="section candidates-section" id="candidatos">
 
-                    <i class="fa-solid fa-user"></i>
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        CANDIDATOS
+                    </span>
+
+                    <h2>
+                        Conheça os candidatos
+                    </h2>
+
+                    <p>
+                        Selecione um candidato para preencher automaticamente
+                        a área de votação.
+                    </p>
+
+                </div>
+
+
+                <!-- BUSCA -->
+                <div class="search-box">
+
+                    <span>🔎</span>
 
                     <input
-                        type="text"
-                        id="candidateInput"
-                        placeholder="Nome do candidato"
+                        type="search"
+                        id="search"
+                        placeholder="Pesquisar candidato ou partido..."
+                        autocomplete="off"
                     >
 
                 </div>
 
 
-                <button
-                    id="voteButton"
-                    class="btn btn-primary"
+                <!-- CARDS -->
+                <div class="candidate-grid" id="candidateGrid">
+
+
+                    <!-- LULA -->
+                    <article
+                        class="candidate-card"
+                        data-candidate="LULA"
+                    >
+
+                        <div class="candidate-image">
+
+                            <img
+                                src="img/lula.jpg"
+                                alt="Lula"
+                                loading="lazy"
+                            >
+
+                        </div>
+
+                        <div class="candidate-info">
+
+                            <span class="candidate-number">
+                                CANDIDATO
+                            </span>
+
+                            <h3>Lula</h3>
+
+                            <p class="party">
+                                PT
+                            </p>
+
+                            <button
+                                class="select-candidate"
+                                type="button"
+                                data-candidate="LULA"
+                            >
+                                Selecionar
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- DILMA -->
+                    <article
+                        class="candidate-card"
+                        data-candidate="DILMA"
+                    >
+
+                        <div class="candidate-image">
+
+                            <img
+                                src="img/dilma.jpg"
+                                alt="Dilma"
+                                loading="lazy"
+                            >
+
+                        </div>
+
+                        <div class="candidate-info">
+
+                            <span class="candidate-number">
+                                CANDIDATA
+                            </span>
+
+                            <h3>Dilma</h3>
+
+                            <p class="party">
+                                PT
+                            </p>
+
+                            <button
+                                class="select-candidate"
+                                type="button"
+                                data-candidate="DILMA"
+                            >
+                                Selecionar
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- SERRA -->
+                    <article
+                        class="candidate-card"
+                        data-candidate="SERRA"
+                    >
+
+                        <div class="candidate-image">
+
+                            <img
+                                src="img/serra.jpg"
+                                alt="Serra"
+                                loading="lazy"
+                            >
+
+                        </div>
+
+                        <div class="candidate-info">
+
+                            <span class="candidate-number">
+                                CANDIDATO
+                            </span>
+
+                            <h3>Serra</h3>
+
+                            <p class="party">
+                                PSDB
+                            </p>
+
+                            <button
+                                class="select-candidate"
+                                type="button"
+                                data-candidate="SERRA"
+                            >
+                                Selecionar
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- MARINA -->
+                    <article
+                        class="candidate-card"
+                        data-candidate="MARINA"
+                    >
+
+                        <div class="candidate-image">
+
+                            <img
+                                src="img/marina.jpg"
+                                alt="Marina"
+                                loading="lazy"
+                            >
+
+                        </div>
+
+                        <div class="candidate-info">
+
+                            <span class="candidate-number">
+                                CANDIDATA
+                            </span>
+
+                            <h3>Marina</h3>
+
+                            <p class="party">
+                                REDE
+                            </p>
+
+                            <button
+                                class="select-candidate"
+                                type="button"
+                                data-candidate="MARINA"
+                            >
+                                Selecionar
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- BOLSONARO -->
+                    <article
+                        class="candidate-card"
+                        data-candidate="BOLSONARO"
+                    >
+
+                        <div class="candidate-image">
+
+                            <img
+                                src="img/bolsonaro.jpg"
+                                alt="Bolsonaro"
+                                loading="lazy"
+                            >
+
+                        </div>
+
+                        <div class="candidate-info">
+
+                            <span class="candidate-number">
+                                CANDIDATO
+                            </span>
+
+                            <h3>Bolsonaro</h3>
+
+                            <p class="party">
+                                PL
+                            </p>
+
+                            <button
+                                class="select-candidate"
+                                type="button"
+                                data-candidate="BOLSONARO"
+                            >
+                                Selecionar
+                            </button>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+
+                <div
+                    class="no-results"
+                    id="noResults"
+                    hidden
                 >
-                    Confirmar
-                    <i class="fa-solid fa-check"></i>
-                </button>
+                    Nenhum candidato encontrado.
+                </div>
 
             </div>
 
+        </section>
 
-            <div
-                class="message"
-                id="message"
-            ></div>
+
+        <!-- ================= VOTAÇÃO ================= -->
+        <section class="section voting-section" id="votacao">
+
+            <div class="container">
+
+                <div class="voting-wrapper">
+
+                    <div class="voting-info">
+
+                        <span class="section-tag">
+                            VOTAÇÃO
+                        </span>
+
+                        <h2>
+                            Registre seu voto
+                        </h2>
+
+                        <p>
+                            Digite o nome do candidato ou selecione uma das
+                            opções abaixo.
+                        </p>
+
+                        <div class="quick-candidates">
+
+                            <button
+                                type="button"
+                                class="quick-btn"
+                                data-candidate="LULA"
+                            >
+                                Lula
+                            </button>
+
+                            <button
+                                type="button"
+                                class="quick-btn"
+                                data-candidate="DILMA"
+                            >
+                                Dilma
+                            </button>
+
+                            <button
+                                type="button"
+                                class="quick-btn"
+                                data-candidate="SERRA"
+                            >
+                                Serra
+                            </button>
+
+                            <button
+                                type="button"
+                                class="quick-btn"
+                                data-candidate="MARINA"
+                            >
+                                Marina
+                            </button>
+
+                            <button
+                                type="button"
+                                class="quick-btn"
+                                data-candidate="BOLSONARO"
+                            >
+                                Bolsonaro
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="vote-box">
+
+                        <form id="voteForm">
+
+                            <label for="candidateInput">
+                                Seu candidato
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <input
+                                    type="text"
+                                    id="candidateInput"
+                                    name="candidate"
+                                    placeholder="Ex.: Lula"
+                                    autocomplete="off"
+                                    required
+                                >
+
+                                <button
+                                    type="submit"
+                                    id="voteButton"
+                                    class="btn btn-primary"
+                                >
+                                    Votar
+                                </button>
+
+                            </div>
+
+                            <p
+                                id="voteMessage"
+                                class="vote-message"
+                                role="status"
+                                aria-live="polite"
+                            ></p>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= RESULTADOS ================= -->
+        <section class="section results-section" id="resultados">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        RESULTADOS
+                    </span>
+
+                    <h2>
+                        Resultado da simulação
+                    </h2>
+
+                    <p>
+                        Acompanhe a quantidade de votos registrada para
+                        cada candidato.
+                    </p>
+
+                </div>
+
+
+                <div class="results-summary">
+
+                    <div class="total-card">
+
+                        <span>
+                            TOTAL DE VOTOS
+                        </span>
+
+                        <strong id="totalVotes">
+                            0
+                        </strong>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        id="resetButton"
+                        class="btn btn-danger"
+                    >
+                        Zerar votos
+                    </button>
+
+                </div>
+
+
+                <div
+                    class="results-list"
+                    id="results"
+                ></div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= MODAL ================= -->
+    <div
+        class="modal"
+        id="modal"
+        hidden
+        aria-hidden="true"
+    >
+
+        <div class="modal-backdrop"></div>
+
+        <div
+            class="modal-content"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modalTitle"
+        >
+
+            <button
+                class="modal-close"
+                id="modalClose"
+                type="button"
+                aria-label="Fechar"
+            >
+                ×
+            </button>
+
+            <div class="modal-icon">
+                ✓
+            </div>
+
+            <h2 id="modalTitle">
+                Voto registrado!
+            </h2>
+
+            <p>
+                Seu voto foi registrado para:
+            </p>
+
+            <strong id="modalCandidate">
+                -
+            </strong>
+
+            <button
+                type="button"
+                id="modalOk"
+                class="btn btn-primary"
+            >
+                Continuar
+            </button>
 
         </div>
 
     </div>
 
-</section>
 
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
 
-<!-- ==================================================
-     RESULTADO
-================================================== -->
+        <div class="container footer-content">
 
-<section
-    class="section result-section"
-    id="resultado"
->
+            <div>
 
-    <div class="container">
-
-        <div class="section-header centered">
-
-            <span class="section-tag">
-                <i class="fa-solid fa-chart-column"></i>
-                SIMULAÇÃO
-            </span>
-
-            <h2>
-                Resultado do projeto
-            </h2>
-
-            <p>
-                Acompanhe os votos registrados
-                nesta sessão do navegador.
-            </p>
-
-        </div>
-
-
-        <div class="result-card">
-
-            <div class="total-votes">
-
-                <span>
-                    TOTAL DE VOTOS
-                </span>
-
-                <strong id="totalVotes">
-                    0
+                <strong class="footer-logo">
+                    RonaldVotos
                 </strong>
 
-            </div>
+                <p>
+                    Simulador educacional de votação.
+                </p>
 
-
-            <div
-                class="results"
-                id="results"
-            >
-
-                <!-- JS preencherá -->
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ==================================================
-     SOBRE
-================================================== -->
-
-<section
-    class="about section"
-    id="sobre"
->
-
-    <div class="container about-grid">
-
-        <div class="about-text">
-
-            <span class="section-tag">
-                <i class="fa-solid fa-code"></i>
-                SOBRE O PROJETO
-            </span>
-
-            <h2>
-                Tecnologia usada
-                para aprender.
-            </h2>
-
-            <p>
-                Este projeto foi desenvolvido para
-                praticar conceitos fundamentais de
-                desenvolvimento web.
-            </p>
-
-            <div class="tech-list">
-
-                <div>
-                    <i class="fa-brands fa-html5"></i>
-
-                    <div>
-                        <strong>HTML5</strong>
-                        <span>Estrutura</span>
-                    </div>
-                </div>
-
-
-                <div>
-                    <i class="fa-brands fa-css3-alt"></i>
-
-                    <div>
-                        <strong>CSS3</strong>
-                        <span>Design</span>
-                    </div>
-                </div>
-
-
-                <div>
-                    <i class="fa-brands fa-js"></i>
-
-                    <div>
-                        <strong>JavaScript</strong>
-                        <span>Interatividade</span>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="about-card">
-
-            <i class="fa-solid fa-graduation-cap"></i>
-
-            <h3>
-                Projeto educacional
-            </h3>
-
-            <p>
-                O objetivo é transformar conceitos
-                de programação em uma aplicação visual
-                e interativa.
-            </p>
-
-            <div class="code-line"></div>
-
-            <span>
-                HTML • CSS • JavaScript
-            </span>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ==================================================
-     FOOTER
-================================================== -->
-
-<footer>
-
-    <div class="container footer-grid">
-
-        <div class="footer-logo">
-
-            <div class="logo">
-                <div class="logo-icon">
-                    <i class="fa-solid fa-check-to-slot"></i>
-                </div>
-
-                <div>
-                    <strong>
-                        Ronald<span>Votos</span>
-                    </strong>
-
-                    <small>
-                        PROJETO EDUCACIONAL
-                    </small>
-                </div>
             </div>
 
             <p>
-                Uma experiência criada para
-                aprender desenvolvimento web.
+                © 2026 RonaldVotos
             </p>
 
         </div>
 
-
-        <div class="footer-links">
-
-            <h4>
-                Navegação
-            </h4>
-
-            <a href="#inicio">
-                Início
-            </a>
-
-            <a href="#candidatos">
-                Candidatos
-            </a>
-
-            <a href="#resultado">
-                Resultado
-            </a>
-
+        <div class="educational-warning">
+            Este site é apenas uma simulação educacional e não possui
+            validade eleitoral.
         </div>
 
-
-        <div class="footer-links">
-
-            <h4>
-                Projeto
-            </h4>
-
-            <a href="#sobre">
-                Sobre
-            </a>
-
-            <span>
-                HTML5
-            </span>
-
-            <span>
-                CSS3
-            </span>
-
-            <span>
-                JavaScript
-            </span>
-
-        </div>
-
-    </div>
-
-
-    <div class="footer-bottom">
-
-        <p>
-            © 2026 RonaldVotos — Projeto educacional.
-        </p>
-
-    </div>
-
-</footer>
-
-
-<!-- ==================================================
-     MODAL
-================================================== -->
-
-<div
-    class="modal"
-    id="modal"
->
-
-    <div class="modal-box">
-
-        <button
-            class="modal-close"
-            id="modalClose"
-        >
-            <i class="fa-solid fa-xmark"></i>
-        </button>
-
-
-        <div class="modal-icon">
-            <i class="fa-solid fa-check"></i>
-        </div>
-
-
-        <span>
-            SELEÇÃO CONFIRMADA
-        </span>
-
-
-        <h2 id="modalCandidate">
-            Candidato
-        </h2>
-
-
-        <p>
-            Você registrou uma escolha no simulador
-            educacional desta página.
-        </p>
-
-
-        <small>
-            Este registro não possui validade eleitoral.
-        </small>
-
-
-        <button
-            class="modal-button"
-            id="modalOk"
-        >
-            Continuar
-        </button>
-
-    </div>
-
-</div>
-
-
-<script src="script.js"></script>
+    </footer>
 
 </body>
-
 </html>
